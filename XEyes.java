@@ -9,10 +9,12 @@ import java.awt.event.*;
  * of this class.
  */
 
-public class XEyes extends JPanel implements MouseListener{
+public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
 
 
     private String fileName = "einstein.jpg";
+    private int xClicked;
+    private int yClicked;
 
     private JFrame myFrame;
     private ImageIcon myPic;
@@ -36,6 +38,8 @@ public class XEyes extends JPanel implements MouseListener{
         eye_2 = new Eye(372, 290, 49, 37);
         addMouseListener(this);
         myFrame.setVisible(true);
+
+        addMouseMotionListener(this);
         }
 
         
@@ -54,15 +58,36 @@ public class XEyes extends JPanel implements MouseListener{
         g.drawImage(myPic.getImage(), 0, 0, this);
         eye_1.draw(g);
         eye_2.draw(g);
+        g.drawLine(eye_1.getPupilX(), eye_1.getPupilY(), xClicked, yClicked);
+        g.drawLine(eye_1.getPupilX(), eye_1.getPupilY(), xClicked, yClicked);
     }
     
     // move the pupil when the mouse is clicked
     public void mouseClicked (MouseEvent event) {
-        eye_1.movePupil(event.getX(), event.getY());
-        eye_2.movePupil(event.getX(), event.getY());
+        int xClicked = event.getX();
+        int yClicked = event.getY();
+        eye_1.movePupil(xClicked, yClicked);
+        eye_2.movePupil(xClicked, yClicked);
         
         repaint();
     }
+
+    public void mouseDragged(MouseEvent event){
+        int xClicked = event.getX();
+        int yClicked = event.getY();
+        eye_1.movePupil(xClicked, yClicked);
+        eye_2.movePupil(xClicked, yClicked);
+		repaint();
+
+	}
+
+	public void mouseMoved(MouseEvent event){
+        int xClicked = event.getX();
+        int yClicked = event.getY();
+        eye_1.movePupil(xClicked, yClicked);
+        eye_2.movePupil(xClicked, yClicked);
+		repaint();
+	}
   
     public void mouseReleased (MouseEvent event) {
     }
@@ -75,5 +100,5 @@ public class XEyes extends JPanel implements MouseListener{
     
     public void mouseExited (MouseEvent event) {
     }
-    
+
 } // end class

@@ -110,6 +110,14 @@ public class Eye {
         // remember your geometry?  y = mx + b?  woot!
         return ( (slope * (pupX - eyeCenterX)) + eyeCenterY );
     }
+
+    public int getPupilX(){
+        return pupilX;
+    }
+    
+    public int getPupilY(){
+        return pupilY;
+    }
     
     
     
